@@ -10,7 +10,7 @@ from common.configHttp import RunMain
 
 url = 'http://api.demo.guanyierp.com/rest/erp_open'
 return_xls = readexcel.readExcel().get_xls('ReturnOrder.xlsx', 'Sheet1')  # 由文件readExcel来获取用例
-print(return_xls)
+
 
 @paramunittest.parametrized(*return_xls)
 class testUserLogin(unittest.TestCase):
@@ -21,7 +21,6 @@ class testUserLogin(unittest.TestCase):
         self.UserCase = UserCase
         self.method = method
         self.params = params
-        print(self.params)
 
     def description(self):
         """
@@ -41,8 +40,8 @@ class testUserLogin(unittest.TestCase):
         self.checkResult()
 
     def checkResult(self):
-
-        info = RunMain().run_main(self.method, url, self.params)
+        params=eval(self.params)
+        info = RunMain().run_main(self.method, url, params)
         ss = json.loads(info)
         if self.UserCase == '审核':  # 如果case_name是login，说明合法，返回的code应该为200
             self.assertTrue('success')

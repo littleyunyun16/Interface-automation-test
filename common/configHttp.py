@@ -30,11 +30,8 @@ class RunMain():
 
 
 if __name__ == '__main__':
-    para= {"method": "gy.erp.trade.return.status.update","sessionkey": "94ee1ca3c41d44989290d02985105865",
-            "appkey": "116761",
-            "code": "RGO12504806369",
-            "audit_status": "2",
-    }
+    para= {"method": "gy.erp.trade.return.status.update","sessionkey": "94ee1ca3c41d44989290d02985105865", "appkey": "116761","code":"RGO12504806369","audit_status": "2",}
+
     result = RunMain().run_main('post', 'http://api.demo.guanyierp.com/rest/erp_open',para)
     print(result)
 
