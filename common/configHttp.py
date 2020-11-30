@@ -30,9 +30,29 @@ class RunMain():
 
 
 if __name__ == '__main__':
-    para= {"method": "gy.erp.trade.return.status.update","sessionkey": "94ee1ca3c41d44989290d02985105865", "appkey": "116761","code":"RGO12504806369","audit_status": "2",}
+    para= {
+    "appkey": "116289",
+    "sessionkey": "8054e48f255a4c388d01fa08cc7f8d54",
+    "method": "gy.erp.trade.return.get",
+    "platform_code": "20201126003",
+}
+    para1={
+            "method": "gy.erp.trade.return.status.update",
+            "sessionkey": "8054e48f255a4c388d01fa08cc7f8d54",
+            "appkey": "116289",
+            "code": "RGO284372880571",
+            "audit_status": "2",
 
-    result = RunMain().run_main('post', 'http://api.demo.guanyierp.com/rest/erp_open',para)
+        }
+
+    para2={
+            "method": "gy.erp.trade.return.get",
+            "sessionkey": "8054e48f255a4c388d01fa08cc7f8d54",
+            "appkey": "116289",
+            "code": "RGO284372880571",
+
+        }
+    result = RunMain().run_main('post', 'http://v2.api.guanyierp.com/rest/erp_open',para2)
     print(result)
 
 

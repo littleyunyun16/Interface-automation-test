@@ -20,5 +20,5 @@ class readExcel():
 
 
 if __name__ == '__main__':
-    # print(readExcel().get_xls('ReturnOrder.xlsx','Sheet1'))
-    print(readExcel().get_xls('ReturnOrder.xlsx', 'Sheet1')[0][5])
+    print(readExcel().get_xls('ReturnOrder.xlsx','Sheet1'))
+    # print(readExcel().get_xls('ReturnOrder.xlsx', 'Sheet1')[0][5])
