@@ -7,30 +7,35 @@ import unittest
 import json
 import urllib.parse
 from common.configHttp import RunMain
-from ddt import  ddt,data,unpack,file_data
+import ddt
 
 return_xls = readexcel.readExcel().get_xls('ReturnOrder.xlsx', 'Sheet1')  # 由文件readExcel来获取用例
+print(return_xls)
 
 
-@ddt
+@ddt.ddt
 class testUserLogin(unittest.TestCase):
-    def setParameters(self, module, ID, UserCase, method, params):
+    @ddt.data(*return_xls)
+    def setParameters(self,data):
 
-        self.module = module
-        self.ID = ID
-        self.UserCase = UserCase
-        self.method = method
-        self.params = params
+        self.id = data['id']
+        self.case_name = data['case_name']
+        self.url = data['url']
+        self.method = data['method']
+        self.params = data['params']
+        self.expect=data['expect']
+        self.response=data['response']
+        self.result=data['result']
+        self.passed=data['passed']
 
     def setUp(self):
-        print(self.UserCase+ "测试开始前准备")
+        print(self.id+ "测试开始前准备")
 
     def tearDown(self):
         print("测试结束，输出log完结\n\n")
-    @data(*return_xls)
     def test01case(self):
         params = eval(self.params)
-        info = RunMain().run_main(self.method, url, params)
+        info = RunMain().run_main(self.method, self.url, params)
         ss = json.loads(info)
 
 

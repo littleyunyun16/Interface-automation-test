@@ -14,7 +14,7 @@ class readExcel():
         sheet=file.sheet_by_name(sheet_name)
         case_nrows=sheet.nrows
         for i in range(case_nrows):
-            if sheet.row_values(i)[0]!=u'module':
+            if sheet.row_values(i)[0]!=u'id':
                 cls.append(sheet.row_values(i))
         return cls
 
