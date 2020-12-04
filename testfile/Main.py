@@ -15,7 +15,6 @@ import pythoncom
 # import common.log
 
 
-
 path = getpathinfo.get_path()
 report_path = os.path.join(path, 'result')
 on_off = readConfig.ReadConfig().get_email('on_off')
