@@ -40,7 +40,6 @@ class AllTest:
             if data !='' and not data.startswith('#'):
                 self.caseList.append(data.replace('\n', ''))
         fb.close()
-        print(self.caseList)
 
 # TestSuite组件将多个用例集合到一起，添加用例到列表，addTest方法将TestCase添加到TestSuite中
     def set_case_suite(self):

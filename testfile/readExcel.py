@@ -1,24 +1,38 @@
+'''读取excel文件并把其'''
+
+
 import os
 import getpathinfo
 import xlrd
 
 path=getpathinfo.get_path()
 
+class ReadExcel():
+    """读取excel文件数据"""
+    def __init__(self, xls_name, sheet_name):
+        self.xls_path=os.path.join(path,'case',xls_name)
+        self.sheet_name=sheet_name
+        self.data = xlrd.open_workbook(self.xls_path)
+        self.table = self.data.sheet_by_name(sheet_name)
+        self.nrows = self.table.nrows
+        self.ncols = self.table.ncols
 
-
-class readExcel():
-    def get_xls(self,xls_name,sheet_name):
-        cls=[]
-        xlsPath=os.path.join(path,'case',xls_name)  # 得到
-        file=xlrd.open_workbook(xlsPath)
-        sheet=file.sheet_by_name(sheet_name)
-        case_nrows=sheet.nrows
-        for i in range(case_nrows):
-            if sheet.row_values(i)[0]!=u'id':
-                cls.append(sheet.row_values(i))
-        return cls
-
+    def read_data(self):
+        if self.nrows > 1:
+            # 获取第一行的内容，列表格式
+            keys = self.table.row_values(0)
+            listApiData = []
+            # 获取每一行的内容，列表格式
+            for col in range(1, self.nrows):
+                values = self.table.row_values(col)
+                # keys，values组合转换为字典
+                api_dict = dict(zip(keys, values))
+                listApiData.append(api_dict)
+            return listApiData
+        else:
+            print("表格是空数据!")
+            return None
 
 if __name__ == '__main__':
-    print(readExcel().get_xls('ReturnOrder.xlsx','Sheet1'))
-    # print(readExcel().get_xls('ReturnOrder.xlsx', 'Sheet1')[0][5])
+    print(ReadExcel('ReturnOrder.xlsx', 'Sheet1').read_data())
+
