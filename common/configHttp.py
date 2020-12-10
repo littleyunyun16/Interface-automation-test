@@ -53,7 +53,6 @@ if __name__ == '__main__':
 
         }
     result = RunMain().run_main('post', 'http://v2.api.guanyierp.com/rest/erp_open',para2)
-    ss=json.loads(result)
-    print(ss)
+    print(result)
 
 

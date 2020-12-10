@@ -13,23 +13,20 @@ from BeautifulReport import BeautifulReport
 from common.configEmail import SendEmail
 from apscheduler.schedulers.blocking import BlockingScheduler
 import pythoncom
-# import common.log
+import common.log
 
 
 path = getpathinfo.get_path()
 report_path = os.path.join(path, 'result')
 on_off = readConfig.ReadConfig().get_email('on_off')
-# log=common.Log.logger
+log=common.log.logger
 
 
 class AllTest:
     def __init__(self):
-        global resultpath
-        resultpath = os.path.join(report_path, 'report.html')  # 存放结果的地址
         self.caseListFile = os.path.join(path,'testfile', 'caselist.txt')  # 配置文件路径，该配置文件配置执行哪些测试文件
         self.caseFile = os.path.join(path, 'testCase')  # 真正的测试断言文件路径
         self.caseList = []  #用例合集
-        # log.info('resultpath',resultpath)
         # log.info('caseListFile', self.caseListFile)
         # log.info('caseFile', self.caseFile)
 
@@ -68,14 +65,11 @@ class AllTest:
     def run(self):
         try:
             suit = self.set_case_suite()
-            print('try')
             if suit is not None:
-                print('if-suit')
                 # 调用HTMLTestRunner
                 result=BeautifulReport(suit)
                 result.report(filename='test_report', description='接口自动化测试报告', log_path=report_path)
 
-                print("测试")
             else:
                 print("Have no case to test.")
         except Exception as ex:

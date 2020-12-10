@@ -22,8 +22,8 @@ class WriteExcel():
         if not os.path.exists(self.filename):
             # 文件不存在，则拷贝模板文件至指定报告目录下
             shutil.copyfile(source_file,target_file)
-        self.wb = load_workbook(self.filename)
-        self.ws = self.wb.active
+        self.wb = load_workbook(self.filename)  # 打开一个xlsx文件
+        self.ws = self.wb.active  # 激活工作表
 
     def write_data(self,row_n,value):
         """
@@ -37,16 +37,16 @@ class WriteExcel():
         font1 = Font(name='宋体', color=BLUE, bold=True)
         align = Alignment(horizontal='center', vertical='center')
         # 获数所在行数
-        L_n = "L" + str(row_n)
-        M_n = "M" + str(row_n)
+        # G_n = "G" + str(row_n)
+        H_n = "H" + str(row_n)
         if value == "PASS":
-            self.ws.cell(row_n, 12, value)
-            self.ws[L_n].font = font_BLUE
+            self.ws.cell(row_n, 8, value)
+            self.ws[H_n].font = font_BLUE
         if value == "FAIL":
-            self.ws.cell(row_n, 12, value)
-            self.ws[L_n].font = font_BLACk
-        self.ws.cell(row_n, 13, )
-        self.ws[L_n].alignment = align
-        self.ws[M_n].font = font1
-        self.ws[M_n].alignment = align
+            self.ws.cell(row_n, 8, value)
+            self.ws[H_n].font = font_BLACk
+        # self.ws.cell(row_n,9, )
+        self.ws[H_n].alignment = align
+        # self.ws[H_n].font = font1
+        # self.ws[H_n].alignment = align
         self.wb.save(self.filename)

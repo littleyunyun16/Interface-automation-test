@@ -5,13 +5,13 @@ from logging.handlers import TimedRotatingFileHandler
 import  getpathinfo
 
 path = getpathinfo.get_path()
-log_path = os.path.join(path, 'result')  # 存放log文件的路径
+log_path = os.path.join(path, 'result','logs')  # 存放log文件的路径
 
 
 class Logger(object):
     def __init__(self, logger_name='logs…'):
-        self.logger = logging.getLogger(logger_name)
-        logging.root.setLevel(logging.NOTSET)
+        self.logger = logging.getLogger(logger_name) #getLogger()方法可以获取日志收集器
+        logging.root.setLevel(logging.NOTSET)  #日志收集器可以指定日志级别
         self.log_file_name = 'logs'  # 日志文件的名称
         self.backup_count = 5  # 最多存放日志的数量
         # 日志输出级别
@@ -23,10 +23,10 @@ class Logger(object):
     def get_logger(self):
         """在logger中添加日志句柄并返回，如果logger已有句柄，则直接返回"""
         if not self.logger.handlers:  # 避免重复日志
-            console_handler = logging.StreamHandler()
-            console_handler.setFormatter(self.formatter)
-            console_handler.setLevel(self.console_output_level)
-            self.logger.addHandler(console_handler)
+            console_handler = logging.StreamHandler()  # 定义流处理器
+            console_handler.setFormatter(self.formatter)  # 设置流处理器的日志输出格式
+            console_handler.setLevel(self.console_output_level)  #设置流处理器的日志级别
+            self.logger.addHandler(console_handler)  # 将流处理器与日志收集器绑定起来
 
             # 每天重新创建一个日志文件，最多保留backup_count份
             file_handler = TimedRotatingFileHandler(filename=os.path.join(log_path, self.log_file_name), when='D',
